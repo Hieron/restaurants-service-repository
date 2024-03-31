@@ -1,0 +1,67 @@
+@BASE_URL = http://localhost:5000
+
+##################################################
+###            Get all the restaurants         ###
+##################################################
+GET {{BASE_URL}}/api/restaurants
+##################################################
+
+
+
+##################################################
+###            Get a restaurant by id          ###
+##################################################
+GET {{BASE_URL}}/api/restaurants/1
+##################################################
+
+
+
+##################################################
+###    Get all the restaurants with filter     ###
+##################################################
+GET {{BASE_URL}}/api/restaurants?addressRegion=SP
+##################################################
+
+
+
+##################################################
+###            Insert a new restaurant         ###
+##################################################
+POST {{BASE_URL}}/api/restaurants
+Content-Type: application/json
+
+{
+    "name": "Outback Steakhouse",
+    "address": {
+        "postalCode": "01415-000",
+        "streetAddress": "Av. Pres. Juscelino Kubitschek, 2041",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+    },
+    "url": "https://www.outback.com.br/",
+    "menu": "https://www.outback.com.br/menu",
+    "telephone": "+55 11 3078-7748",
+    "priceRange": "15-45"
+}
+##################################################
+
+
+
+##################################################
+###            Update a new restaurant         ###
+##################################################
+PUT {{BASE_URL}}/api/restaurants/1
+Content-Type: application/json
+
+{
+    "name": "Outback Steakhouse Brasil"
+}
+##################################################
+
+
+##################################################
+###         Delete a restaurant by id          ###
+##################################################
+DELETE {{BASE_URL}}/api/restaurants/1
+##################################################
