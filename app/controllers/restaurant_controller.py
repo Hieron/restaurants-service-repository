@@ -75,7 +75,13 @@ class RestaurantController:
         })
 
     def update_restaurant(self, restaurant_id, data):
-        restaurant = Restaurant.query.get_or_404(restaurant_id)
+        restaurant = Restaurant.query.get(restaurant_id)
+        if restaurant is None:
+            return jsonify({
+                'success': False,
+                'message': 'Restaurant not found.'
+            }), 404
+        
         restaurant.name = data.get('name', restaurant.name)
         restaurant.url = data.get('url', restaurant.url)
         restaurant.menu = data.get('menu', restaurant.menu)
@@ -95,9 +101,15 @@ class RestaurantController:
             'message': 'Restaurant updated successfully.'
         })
 
-    def delete_restaurant(self, restaurante_id):
-        restaurante = Restaurant.query.get_or_404(restaurante_id)
-        db.session.delete(restaurante)
+    def delete_restaurant(self, restaurant_id):
+        restaurant = Restaurant.query.get(restaurant_id)
+        if restaurant is None:
+            return jsonify({
+                'success': False,
+                'message': 'Restaurant not found.'
+            }), 404
+        
+        db.session.delete(restaurant)
         db.session.commit()
         return jsonify({
             'success': True,
