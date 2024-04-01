@@ -9,6 +9,7 @@ Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal 
 3. [Instalação](#instalação)
 4. [Configuração](#configuração)
 5. [Como Usar](#como-usar)
+6. [Como Testar](#como-testar)
 
 ## Visão Geral
 
@@ -64,4 +65,12 @@ deactivate
 Para inicializar o serviço utilize o seguinte comando:
 ```bash
 python run.py
+```
+
+## Como Testar
+
+Para inicializar o script de teste utilize o seguinte comando em outro terminal:
+```bash
+cd client
+python script.py
 ```
