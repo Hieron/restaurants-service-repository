@@ -1,4 +1,4 @@
-# Nome do Projeto
+# Restaurants Service
 
 Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal do Rio de Janeiro implementado pelo Grupo D para a segunda tarefa da disciplina Arquitetura de Serviços.
 
