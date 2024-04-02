@@ -47,7 +47,10 @@ class RestaurantController:
                 'message': 'Restaurant not found.'
             }), 404
 
-        return jsonify(self.format_restaurant(restaurant))
+        return jsonify({
+            'success': True,
+            'data': self.format_restaurant(restaurant)
+        })
 
     def create_restaurant(self, data):
         restaurant = Restaurant(
