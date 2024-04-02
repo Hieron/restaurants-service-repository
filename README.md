@@ -10,6 +10,7 @@ Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal 
 4. [Configuração](#configuração)
 5. [Como Usar](#como-usar)
 6. [Como Testar](#como-testar)
+7. [Documentação](#documentação)
 
 ## Visão Geral
 
@@ -74,3 +75,11 @@ Para inicializar o script de teste utilize o seguinte comando em outro terminal:
 cd client
 python script.py
 ```
+## Documentação
+
+<a href="https://github.com/setxpro/restaurants-service-repository/blob/main/documentation/swagger.yml" target="_blank" rel="noopener noreferrer">
+swagger.yml
+</a><br/>
+
+<b>Onde Utilizar</b> <br/>
+<a href="https://editor.swagger.io/" target="_blank" rel="noopener noreferrer">https://editor.swagger.io/</a>
