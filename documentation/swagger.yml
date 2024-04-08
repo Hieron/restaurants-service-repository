@@ -2,7 +2,7 @@ openapi: "3.0.1"
 info:
   title: "Restaurant Manager"
   description: "Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal do Rio de Janeiro implementado pelo Grupo D para a segunda tarefa da disciplina Arquitetura de Serviços."
-  version: "v0.0.1"
+  version: "v1.0.0"
 externalDocs:
   description: "Github"
   url: "https://github.com/Hieron/restaurants-service-repository"
@@ -56,7 +56,7 @@ paths:
     servers:
       - url: http://localhost:5000
 
-  /api/restaurants?addressRegion:
+  /api/restaurants?addressRegion=SP:
     parameters:
       - in: query
         name: addressRegion
