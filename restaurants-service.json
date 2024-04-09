@@ -1,0 +1,398 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Restaurants Service",
+    "description": "Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal do Rio de Janeiro implementado pelo Grupo D para a segunda tarefa da disciplina Arquitetura de Serviços.",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Github repository",
+    "url": "https://github.com/Hieron/restaurants-service-repository"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000",
+      "description": "Localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "restaurants",
+      "description": "Management of restaurants"
+    }
+  ],
+  "paths": {
+    "/api/restaurants": {
+      "get": {
+        "tags": [
+          "restaurants"
+        ],
+        "summary": "Get restaurants",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/postalCode"
+          },
+          {
+            "$ref": "#/components/parameters/streetAddress"
+          },
+          {
+            "$ref": "#/components/parameters/addressLocality"
+          },
+          {
+            "$ref": "#/components/parameters/addressRegion"
+          },
+          {
+            "$ref": "#/components/parameters/addressCountry"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetAll"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "restaurants"
+        ],
+        "summary": "Create a restaurant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Created"
+          }
+        }
+      }
+    },
+    "/api/restaurants/{restaurant_id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "restaurant_id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "ID of the restaurant"
+        }
+      ],
+      "get": {
+        "tags": [
+          "restaurants"
+        ],
+        "summary": "Get a restaurant by ID",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetById"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "restaurants"
+        ],
+        "summary": "Update a restaurant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Updated"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "restaurants"
+        ],
+        "summary": "Delete a restaurant",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/Deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Restaurant": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Outback Steakhouse"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://www.outback.com.br/"
+          },
+          "menu": {
+            "type": "string",
+            "example": "https://www.outback.com.br/menu"
+          },
+          "telephone": {
+            "type": "string",
+            "example": "+55 11 3078-7748"
+          },
+          "priceRange": {
+            "type": "string",
+            "example": "11-55"
+          }
+        },
+        "required": [
+          "name",
+          "address"
+        ]
+      },
+      "RestaurantWithID": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64",
+                "example": 1
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Restaurant"
+          }
+        ]
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "postalCode": {
+            "type": "string",
+            "example": "01415-000"
+          },
+          "streetAddress": {
+            "type": "string",
+            "example": "Av. Pres. Juscelino Kubitschek, 2041"
+          },
+          "addressLocality": {
+            "type": "string",
+            "example": "São Paulo"
+          },
+          "addressRegion": {
+            "type": "string",
+            "example": "SP"
+          },
+          "addressCountry": {
+            "type": "string",
+            "example": "BR"
+          }
+        },
+        "required": [
+          "restaurant_id",
+          "postalCode",
+          "streetAddress",
+          "addressLocality",
+          "addressRegion",
+          "addressCountry"
+        ]
+      }
+    },
+    "parameters": {
+      "postalCode": {
+        "in": "query",
+        "name": "postalCode",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Postal code of the restaurant"
+      },
+      "streetAddress": {
+        "in": "query",
+        "name": "streetAddress",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Street address of the restaurant"
+      },
+      "addressLocality": {
+        "in": "query",
+        "name": "addressLocality",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Locality of the restaurant"
+      },
+      "addressRegion": {
+        "in": "query",
+        "name": "addressRegion",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Region of the restaurant"
+      },
+      "addressCountry": {
+        "in": "query",
+        "name": "addressCountry",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Country of the restaurant"
+      }
+    },
+    "responses": {
+      "GetAll": {
+        "description": "List of restaurants",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RestaurantWithID"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetById": {
+        "description": "Restaurant details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "data": {
+                  "$ref": "#/components/schemas/RestaurantWithID"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Created": {
+        "description": "The restaurant was created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "restaurant_id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Restaurant created successfully."
+                }
+              }
+            }
+          }
+        }
+      },
+      "Updated": {
+        "description": "The restaurant was updated",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Restaurant updated successfully."
+                }
+              }
+            }
+          }
+        }
+      },
+      "Deleted": {
+        "description": "The restaurant was deleted",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Restaurant excluded successfully."
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The restaurant was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Restaurant not found."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
