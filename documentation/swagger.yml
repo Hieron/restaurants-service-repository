@@ -56,22 +56,6 @@ paths:
     servers:
       - url: http://localhost:5000
 
-  /api/restaurants?addressRegion=SP:
-    parameters:
-      - in: query
-        name: addressRegion
-        required: true
-        schema:
-          type: string
-        description: Locality of the restaurant
-    get:
-      summary: Get restaurants by locality
-      responses:
-        "200":
-          description: List of restaurants in the locality
-    servers:
-      - url: http://localhost:5000
-
   /api/restaurants/{restaurant_id}:
     parameters:
       - in: path
