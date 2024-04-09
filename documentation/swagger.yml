@@ -1,18 +1,23 @@
-openapi: "3.0.1"
+openapi: 3.0.1
 info:
-  title: "Restaurant Manager"
-  description: "Projeto relativo ao curso MBA em Engenharia de Software da Universidade Federal do Rio de Janeiro implementado pelo Grupo D para a segunda tarefa da disciplina Arquitetura de Serviços."
-  version: "v0.0.1"
+  title: Restaurant Manager
+  description: >-
+    Projeto relativo ao curso MBA em Engenharia de Software da Universidade
+    Federal do Rio de Janeiro implementado pelo Grupo D para a segunda tarefa da
+    disciplina Arquitetura de Serviços.
+  version: v1.0.0
 externalDocs:
-  description: "Github"
-  url: "https://github.com/Hieron/restaurants-service-repository"
+  description: Github
+  url: https://github.com/Hieron/restaurants-service-repository
 servers:
-  - url: "http://localhost:5000"
-    description: "restaurants"
+  - url: http://localhost:5000
+    description: restaurants
 paths:
   /api/restaurants:
     get:
       summary: Get restaurants
+      tags: 
+        - Restaurants
       parameters:
         - in: query
           name: postalCode
@@ -40,38 +45,23 @@ paths:
             type: string
           description: Country of the restaurant
       responses:
-        "200":
+        '200':
           description: List of restaurants
     post:
       summary: Create a restaurant
+      tags: 
+        - Restaurants
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Restaurant"
+              $ref: '#/components/schemas/Restaurant'
       responses:
-        "201":
+        '201':
           description: Restaurant created
     servers:
       - url: http://localhost:5000
-
-  /api/restaurants?addressRegion:
-    parameters:
-      - in: query
-        name: addressRegion
-        required: true
-        schema:
-          type: string
-        description: Locality of the restaurant
-    get:
-      summary: Get restaurants by locality
-      responses:
-        "200":
-          description: List of restaurants in the locality
-    servers:
-      - url: http://localhost:5000
-
   /api/restaurants/{restaurant_id}:
     parameters:
       - in: path
@@ -83,34 +73,39 @@ paths:
         description: ID of the restaurant
     get:
       summary: Get a restaurant by ID
+      tags: 
+        - Restaurants
       responses:
-        "200":
+        '200':
           description: Restaurant details
-        "404":
+        '404':
           description: Restaurant not found
     put:
       summary: Update a restaurant
+      tags: 
+        - Restaurants
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Restaurant"
+              $ref: '#/components/schemas/Restaurant'
       responses:
-        "200":
+        '200':
           description: Restaurant updated
-        "404":
+        '404':
           description: Restaurant not found
     delete:
       summary: Delete a restaurant
+      tags: 
+        - Restaurants
       responses:
-        "204":
+        '204':
           description: Restaurant deleted
-        "404":
+        '404':
           description: Restaurant not found
     servers:
       - url: http://localhost:5000
-
 components:
   schemas:
     Restaurant:
@@ -127,10 +122,9 @@ components:
         priceRange:
           type: string
         address:
-          $ref: "#/components/schemas/Address"
+          $ref: '#/components/schemas/Address'
       required:
         - name
-
     Address:
       type: object
       properties:
