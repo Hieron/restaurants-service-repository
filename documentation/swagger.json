@@ -166,7 +166,7 @@
             },
             "priceRange": {
               "type": "string",
-              "example": "+55 11 3078-7748"
+              "example": "11-55"
             }
           },
           "required": [
@@ -395,4 +395,4 @@
         }
       }
     }
-  }
+}
